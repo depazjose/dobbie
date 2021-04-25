@@ -1,8 +1,7 @@
 package com.mdt.dobbie.domain.model
 
 data class HomeLocation(
-    val locationId: Long,
+    var locationId: Long?,
     val homeId: Long,
-    val description: String,
-    val id: Long) {
+    val description: String) {
 }

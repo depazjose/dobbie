@@ -1,8 +1,7 @@
 package com.mdt.dobbie.domain.model
 
 data class Home(
-    val homeId: Long,
+    var homeId: Long?,
     val userId: String,
-    val description: String,
-    val id: Long) {
+    val description: String)  {
 }

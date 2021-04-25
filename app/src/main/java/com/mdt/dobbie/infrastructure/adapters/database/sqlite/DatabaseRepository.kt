@@ -3,9 +3,14 @@ package com.mdt.dobbie.infrastructure.adapters.database.sqlite
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.provider.BaseColumns
 import com.mdt.dobbie.R
 
-class DatabaseRepository(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class DatabaseRepository(context: Context) : SQLiteOpenHelper(
+    context,
+    DATABASE_NAME,
+    null,
+    DATABASE_VERSION) {
 
     companion object {
         const val DATABASE_VERSION = 1
@@ -13,10 +18,27 @@ class DatabaseRepository(context: Context) : SQLiteOpenHelper(context, DATABASE_
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        TODO("Not yet implemented")
+        db?.execSQL(buildHomeDataSql())
+        db?.execSQL(buildHomeLocationDataSql())
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         TODO("Not yet implemented")
+    }
+
+    private fun buildHomeDataSql(): String {
+        return "CREATE TABLE ${HomeData.HomeEntry.TABLE_NAME} (" +
+                "${BaseColumns._ID} INTEGER, " +
+                "${HomeData.HomeEntry.USER_ID} TEXT, " +
+                "${HomeData.HomeEntry.HOME_ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "${HomeData.HomeEntry.DESCRIPTION} TEXT)"
+    }
+
+    private fun buildHomeLocationDataSql(): String {
+        return "CREATE TABLE ${HomeLocationData.HomeLocationEntry.TABLE_NAME} (" +
+                "${BaseColumns._ID} INTEGER, " +
+                "${HomeLocationData.HomeLocationEntry.LOCATION_ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "${HomeLocationData.HomeLocationEntry.HOME_ID} INTEGER, " +
+                "${HomeLocationData.HomeLocationEntry.DESCRIPTION} TEXT)"
     }
 }

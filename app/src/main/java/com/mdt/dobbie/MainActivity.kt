@@ -13,6 +13,9 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.mdt.dobbie.domain.model.Home
+import com.mdt.dobbie.domain.model.HomeLocation
+import com.mdt.dobbie.domain.usecase.HomeUseCase
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,6 +41,15 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        var homeUseCase = HomeUseCase(this.applicationContext)
+
+        var homeModel = Home(0, "midesatech@gmail.com", "main")
+
+        var newHome = homeUseCase.newHome(homeModel)
+
+        val homeLocation = HomeLocation(null, newHome.homeId!!, "new home location")
+        var newHomeLocation = homeUseCase.newHomelocation(homeLocation)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

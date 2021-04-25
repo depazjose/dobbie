@@ -12,5 +12,5 @@
     <string name="menu_slideshow">Slideshow</string>
 
     <!-- DATABASE SECTION -->
-    <string name="DATABASE_NAME">internalDoubts</string>
+    <string name="DATABASE_NAME">internalDoubts.db</string>
 </resources>
